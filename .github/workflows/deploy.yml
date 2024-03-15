@@ -3,16 +3,21 @@ name: Deploy
 on:
   workflow_run:
     workflows: ['Lint', 'Test']
+    types: [completed]
     branches: [main]
-    types:
-      - completed
-  push:
-    branches:
-      - main
 
 jobs:
+  check:
+    name: Check Lint/Test workflows
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🕵️ Check if Lint and Test Workflows were successful
+        if: ${{ needs.lint.result == 'success' && needs.test.result == 'success' }}
+        run: echo "Lint and Test Workflows were successful, triggering deployment"
+
   build:
     name: Build
+    needs: check
     runs-on: ubuntu-latest
 
     steps:
