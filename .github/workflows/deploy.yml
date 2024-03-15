@@ -7,17 +7,22 @@ on:
     branches: [main]
 
 jobs:
-  check:
-    name: Check Lint/Test workflows
+  dummy:
     runs-on: ubuntu-latest
     steps:
-      - name: 🕵️ Check if Lint and Test Workflows were successful
-        if: ${{ needs.lint.result == 'success' && needs.test.result == 'success' }}
+      - name: Dummy job
+        run: echo "Dummy job"
+
+  orchestrate:
+    runs-on: ubuntu-latest
+    if: ${{ needs.lint.result == 'success' && needs.test.result == 'success' }}
+    steps:
+      - name: Trigger deployment
         run: echo "Lint and Test Workflows were successful, triggering deployment"
 
   build:
     name: Build
-    needs: check
+    needs: orchestrate
     runs-on: ubuntu-latest
 
     steps:
