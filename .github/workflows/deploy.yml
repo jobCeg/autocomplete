@@ -44,7 +44,7 @@ jobs:
       - name: 🧱 Build project
         run: npm run build
 
-      - name: 🛜 Upload artifact
+      - name: 📡 Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
@@ -59,12 +59,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 👇 Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: production-files
-          path: ./dist
-
       - name: 🛠️Setup Pages
         uses: actions/configure-pages@v4
 
