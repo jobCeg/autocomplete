@@ -27,6 +27,9 @@ jobs:
   deploy:
     name: Build
     needs: orchestrate
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
