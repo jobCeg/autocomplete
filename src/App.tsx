@@ -1,22 +1,24 @@
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import { Autocomplete } from './components/Autocomplete/Autocomplete';
+// import { useLazyQuery } from './hooks/useLazyQuery';
+// import { getUsers } from './features/users/api/getUsers';
+// import type { QueryFnResponseType, QueryFnType } from './features/users/api/getUsers';
 
 function App() {
+  // const { abort, data, loading, fetch } = useLazyQuery<QueryFnType, QueryFnResponseType>({
+  //   queryFn: getUsers,
+  // });
+
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" rel="noreferrer" target="_blank">
-          <img alt="Vite logo" className="logo" src={viteLogo} />
-        </a>
-        <a href="https://react.dev" rel="noreferrer" target="_blank">
-          <img alt="React logo" className="logo react" src={reactLogo} />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <h1>sample deploy</h1>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <div data-testid="app">
+      <h2>Autocomplete</h2>
+      {/* <h3>{loading && <p>Loading...</p>}</h3> */}
+      <Autocomplete />
+      {/* <ul>{!!data && data.slice(0, 5).map((user) => <li key={user.id}>{user.name}</li>)}</ul> */}
+
+      {/* <button onClick={() => fetch({ body: '' })}>fetch</button>
+      <button onClick={() => abort()}>cancel</button> */}
+    </div>
   );
 }
 
