@@ -1,7 +1,7 @@
 import { api } from '../../../api';
 import { API_URL } from '../../../config';
 
-import { User } from '../types';
+import type { User } from '../types';
 
 export const getUsers = async (options?: RequestInit): Promise<User[]> => {
   return api<User[]>(`${API_URL}/users`, options);

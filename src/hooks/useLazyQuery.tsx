@@ -15,7 +15,7 @@ export function useLazyQuery<
   const [loading, setLoading] = useState(false);
 
   const fetch = useCallback(
-    async (options: RequestInit) => {
+    async (options?: RequestInit) => {
       setLoading(true);
       try {
         controller = new AbortController();

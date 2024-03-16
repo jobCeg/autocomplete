@@ -5,7 +5,7 @@ import { getUsers } from './features/users/api/getUsers';
 import type { QueryFnResponseType, QueryFnType } from './features/users/api/getUsers';
 
 function App() {
-  const { abort, data, fetch, loading } = useLazyQuery<QueryFnType, QueryFnResponseType>({
+  const { abort, data, loading, fetch } = useLazyQuery<QueryFnType, QueryFnResponseType>({
     queryFn: getUsers,
   });
 
@@ -16,9 +16,7 @@ function App() {
       <Autocomplete />
       <ul>{!!data && data.slice(0, 5).map((user) => <li key={user.id}>{user.name}</li>)}</ul>
 
-      <button onClick={() => fetch({ body: JSON.stringify({ a: 1 }), method: 'POST' })}>
-        fetch
-      </button>
+      <button onClick={() => fetch({ body: '' })}>fetch</button>
       <button onClick={() => abort()}>cancel</button>
     </div>
   );
