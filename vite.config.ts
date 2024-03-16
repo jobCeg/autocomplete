@@ -1,15 +1,16 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 import { defineConfig } from 'vite';
+import { configDefaults } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   //path used for github pages https://jobceg.github.io/autocomplete/
   base: '/autocomplete',
   plugins: [react()],
   test: {
     coverage: {
+      exclude: [...(configDefaults.coverage.exclude ?? []), 'src/main.tsx'],
       reporter: ['html', 'text', 'json-summary', 'json'],
       thresholds: {
         branches: 80,
@@ -19,6 +20,7 @@ export default defineConfig({
       },
     },
     environment: 'jsdom',
+    exclude: [...configDefaults.exclude, 'src/main.tsx'],
     globals: true,
     setupFiles: ['./setupTest.ts'],
   },
