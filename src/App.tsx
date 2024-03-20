@@ -1,23 +1,42 @@
+import { useEffect, useState } from 'react';
+import { Autocomplete, AutocompleteOption } from './components/Autocomplete/Autocomplete';
+import { useLazyQuery } from './hooks/useLazyQuery';
+import { getUsers } from './features/users/api/getUsers';
+import type { QueryFnResponseType, QueryFnType } from './features/users/api/getUsers';
+import { mapUserToOption } from './features/users/mappers/mapUserToOption';
 import './App.css';
-import { Autocomplete } from './components/Autocomplete/Autocomplete';
-// import { useLazyQuery } from './hooks/useLazyQuery';
-// import { getUsers } from './features/users/api/getUsers';
-// import type { QueryFnResponseType, QueryFnType } from './features/users/api/getUsers';
 
 function App() {
-  // const { abort, data, loading, fetch } = useLazyQuery<QueryFnType, QueryFnResponseType>({
-  //   queryFn: getUsers,
-  // });
+  const [selected, setSelected] = useState<null | AutocompleteOption>(null);
+  const { abort, data, loading, fetch } = useLazyQuery<QueryFnType, QueryFnResponseType>({
+    queryFn: getUsers,
+  });
+
+  useEffect(() => {
+    fetch();
+    return () => {
+      abort();
+    };
+  }, [fetch, abort]);
+
+  const options = (data || []).map(mapUserToOption);
+
+  const onSelect = (selected: AutocompleteOption) => {
+    setSelected(selected);
+  };
 
   return (
     <div data-testid="app">
       <h2>Autocomplete</h2>
-      {/* <h3>{loading && <p>Loading...</p>}</h3> */}
-      <Autocomplete />
-      {/* <ul>{!!data && data.slice(0, 5).map((user) => <li key={user.id}>{user.name}</li>)}</ul> */}
-
-      {/* <button onClick={() => fetch({ body: '' })}>fetch</button>
-      <button onClick={() => abort()}>cancel</button> */}
+      <Autocomplete
+        label="User"
+        loading={loading}
+        onSelect={onSelect}
+        options={options}
+        placeholder="Select a users..."
+      />
+      <h4>Selected User:</h4>
+      <pre>{JSON.stringify(selected)}</pre>
     </div>
   );
 }
