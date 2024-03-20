@@ -1,13 +1,15 @@
 import { User } from '../features/users/types';
 
+export const WHITNEY_DONNELLY: User = {
+  avatar:
+    'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/693.jpg',
+  createdAt: '2024-03-14T04:14:42.144Z',
+  id: '1',
+  name: 'Whitney Donnelly',
+};
+
 export const USERS_RESPONSE: User[] = [
-  {
-    avatar:
-      'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/693.jpg',
-    createdAt: '2024-03-14T04:14:42.144Z',
-    id: '1',
-    name: 'Whitney Donnelly',
-  },
+  WHITNEY_DONNELLY,
   {
     avatar:
       'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/180.jpg',
