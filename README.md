@@ -1,4 +1,4 @@
-# Automcomplete
+# Autocomplete
 
 ```sh
 # Install dependencies
